@@ -974,29 +974,6 @@ export default function WasteAnalyzer({
           {activePrediction && (
   <div
     className="ww-results-panel"
-    data-lenis-prevent
-    onWheel={(event) => {
-      const panel = event.currentTarget;
-
-      if (panel.scrollHeight <= panel.clientHeight) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      const nextScrollTop =
-        panel.scrollTop + event.deltaY;
-
-      panel.scrollTop = Math.max(
-        0,
-        Math.min(
-          nextScrollTop,
-          panel.scrollHeight -
-            panel.clientHeight,
-        ),
-      );
-    }}
   >
               <div className="ww-results-heading">
                 <div>
@@ -1122,6 +1099,31 @@ export default function WasteAnalyzer({
                 </div>
               )}
 
+              <div
+                className="ww-results-content"
+                data-lenis-prevent
+                onWheel={(event) => {
+                  const content = event.currentTarget;
+
+                  if (content.scrollHeight <= content.clientHeight) {
+                    return;
+                  }
+
+                  event.preventDefault();
+                  event.stopPropagation();
+
+                  const nextScrollTop =
+                    content.scrollTop + event.deltaY;
+
+                  content.scrollTop = Math.max(
+                    0,
+                    Math.min(
+                      nextScrollTop,
+                      content.scrollHeight - content.clientHeight,
+                    ),
+                  );
+                }}
+              >
               {/* =================================================
                   OBJECTS
               ================================================= */}
@@ -1374,6 +1376,7 @@ export default function WasteAnalyzer({
                 Analyze Another Image
                 <span>↗</span>
               </button>
+              </div>
             </div>
           )}
         </div>

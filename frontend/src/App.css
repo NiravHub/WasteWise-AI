@@ -4103,6 +4103,16 @@ body,
   gap: 16px !important;
 }
 
+.ww-results-heading > div:first-child > span {
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  color: #edf8f1 !important;
+}
+
 
 /* =========================================================
    MOBILE / TABLET
@@ -4334,7 +4344,11 @@ body,
 }
 
 .ww-object-section {
-  margin-top: 24px !important;
+  margin-top: 12px !important;
+  padding: 12px !important;
+  border: 1px solid rgba(125, 209, 153, 0.12) !important;
+  border-radius: 14px !important;
+  background: rgba(7, 17, 13, 0.42) !important;
 }
 
 .ww-section-label {
@@ -5157,6 +5171,8 @@ body,
 
   height: 100% !important;
 
+  padding: clamp(16px, 2vw, 24px) !important;
+
   overflow: hidden !important;
 
   box-sizing: border-box !important;
@@ -5180,9 +5196,8 @@ body,
 
 .ww-panel-heading h3 {
   min-width: 0 !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
+  overflow-wrap: anywhere !important;
+  white-space: normal !important;
 }
 
 
@@ -5238,13 +5253,6 @@ body,
 
   box-sizing: border-box !important;
 
-  /*
-     THIS is the important part.
-     The panel itself owns the scrolling.
-  */
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-
   overscroll-behavior: contain !important;
 
   scrollbar-gutter: stable !important;
@@ -5261,17 +5269,17 @@ body,
 
 /* ---------- CUSTOM DECISION ENGINE SCROLLBAR ---------- */
 
-.ww-results-panel::-webkit-scrollbar {
+.ww-results-content::-webkit-scrollbar {
   width: 8px !important;
 }
 
-.ww-results-panel::-webkit-scrollbar-track {
+.ww-results-content::-webkit-scrollbar-track {
   background: rgba(7, 17, 13, 0.65) !important;
 
   border-radius: 999px !important;
 }
 
-.ww-results-panel::-webkit-scrollbar-thumb {
+.ww-results-content::-webkit-scrollbar-thumb {
   background: rgba(74, 211, 132, 0.55) !important;
 
   border-radius: 999px !important;
@@ -5279,13 +5287,13 @@ body,
   border: 2px solid rgba(7, 17, 13, 0.7) !important;
 }
 
-.ww-results-panel::-webkit-scrollbar-thumb:hover {
+.ww-results-content::-webkit-scrollbar-thumb:hover {
   background: rgba(91, 224, 147, 0.85) !important;
 }
 
 
 /* Firefox */
-.ww-results-panel {
+.ww-results-content {
   scrollbar-width: thin !important;
   scrollbar-color:
     rgba(74, 211, 132, 0.55)
@@ -5456,10 +5464,36 @@ body,
 }
 
 .ww-results-panel {
+  display: flex !important;
+  flex-direction: column !important;
   overflow-x: hidden !important;
-  overflow-y: auto !important;
+  overflow-y: hidden !important;
   height: 100% !important;
   min-height: 0 !important;
+}
+
+.ww-results-heading,
+.ww-accounting,
+.ww-filter-breakdown {
+  flex: 0 0 auto !important;
+}
+
+.ww-results-content {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  scrollbar-gutter: stable !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.ww-results-content::-webkit-scrollbar {
+  cursor: grab !important;
+}
+
+.ww-results-content::-webkit-scrollbar-thumb:active {
+  cursor: grabbing !important;
 }
 
 /* =========================================================
@@ -6175,7 +6209,7 @@ body,
   grid-template-columns:
     minmax(0, 1.15fr)
     minmax(430px, 0.85fr) !important;
-  gap: 22px !important;
+  gap: 0 !important;
 }
 
 /* Let the image panel take advantage of the extra width */
@@ -6198,7 +6232,7 @@ body,
     grid-template-columns:
       minmax(0, 1.2fr)
       minmax(460px, 0.8fr) !important;
-    gap: 26px !important;
+    gap: 0 !important;
   }
 }
 
@@ -6211,7 +6245,7 @@ body,
     grid-template-columns:
       minmax(0, 1fr)
       minmax(390px, 0.82fr) !important;
-    gap: 18px !important;
+    gap: 0 !important;
   }
 }
 
@@ -6224,11 +6258,20 @@ body,
     grid-template-columns: 1fr !important;
     height: auto !important;
     max-height: none !important;
+    gap: 22px !important;
   }
 
   .ww-results-panel {
-    height: auto !important;
-    max-height: 80vh;
+    height: min(700px, 80vh) !important;
+    max-height: 80vh !important;
+    overflow: hidden !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .ww-results-panel {
+    height: min(600px, 70vh) !important;
+    max-height: 70vh !important;
   }
 }
 
@@ -9484,7 +9527,6 @@ body {
    Analyzer top edge
    --------------------------------------------------------- */
 
-.ww-analyzer::before,
 .analyzer-shell::before {
   content: "";
   position: absolute;
@@ -9608,21 +9650,6 @@ body {
       rgba(7, 16, 10, 0.78),
       rgba(3, 9, 6, 0.72)
     );
-}
-
-.ww-results-panel::before {
-  content: "";
-  position: sticky;
-  top: 0;
-  display: block;
-  height: 1px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(125, 209, 153, 0.20),
-      transparent
-    );
-  z-index: 5;
 }
 
 /* ---------------------------------------------------------
