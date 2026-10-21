@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.vite/
+
+# Datasets / downloaded external data
+data/external/
+data/raw/
+data/processed/
+data/cache/
+
+# Archives
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+
+# Model checkpoints / weights
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+
+# Training / experiment outputs
+runs/
+wandb/
+mlruns/
+
+# Temporary / generated files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Office temporary files
+~$*
+
+# OS/editor
+.vscode/
+.idea/
+
+# Large generated audit artifacts
+results/dataset_audit/cross_dataset_duplicates/*.csv
+
+# Local/generated diagnostic artifacts excluded from the public snapshot
+/results/
+/wastewise_full_tree.txt
+/temp_*.py
+/scripts/diagnostic_e4_trace.py
+/scripts/patch_taco_diagnostic.py
+
+# Local evidence bundle
+WasteWise_OEP_Evidence.zip

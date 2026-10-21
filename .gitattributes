@@ -1,0 +1,2 @@
+models/expanded_resnet50_stage2_best.pth filter=lfs diff=lfs merge=lfs -text
+runs/detect/results/taco_external_balanced/yolo11s_balanced/weights/best.pt filter=lfs diff=lfs merge=lfs -text

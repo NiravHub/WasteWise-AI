@@ -1,0 +1,350 @@
+project:
+  name: WasteWise AI
+  version: "1.0"
+  purpose: "Hierarchical waste classification and waste-domain expansion"
+
+principles:
+  - "Never modify raw datasets"
+  - "Never overwrite original labels"
+  - "Preserve source dataset and source label"
+  - "Keep medical Dataset A and Dataset B separated"
+  - "Keep TACO detection-oriented"
+  - "Keep COCO outside the waste classifier"
+  - "Perform cross-dataset deduplication before training"
+  - "Use canonical labels only for model training"
+
+core_classes:
+  battery:
+    family: e_waste
+    description: "Batteries and battery packs"
+
+  biological:
+    family: organic_biological
+    description: "Biological/organic waste"
+
+  cardboard:
+    family: recyclable
+    description: "Cardboard and corrugated paper"
+
+  clothes:
+    family: textile_reusable
+    description: "Clothing and textile items"
+
+  glass:
+    family: recyclable
+    description: "Glass waste and glass containers"
+
+  metal:
+    family: recyclable
+    description: "Metal waste and metal containers"
+
+  paper:
+    family: recyclable
+    description: "Paper waste"
+
+  plastic:
+    family: recyclable
+    description: "Plastic waste and plastic containers"
+
+  shoes:
+    family: textile_reusable
+    description: "Footwear"
+
+  trash:
+    family: residual
+    description: "General/residual waste"
+
+
+expanded_classes:
+
+  recyclable:
+    plastic:
+      family: recyclable
+    glass:
+      family: recyclable
+    metal:
+      family: recyclable
+    paper:
+      family: recyclable
+    cardboard:
+      family: recyclable
+
+  organic_biological:
+    biological:
+      family: organic_biological
+    food_waste:
+      family: organic_biological
+
+  textile_reusable:
+    clothes:
+      family: textile_reusable
+    shoes:
+      family: textile_reusable
+
+  e_waste:
+    battery:
+      family: e_waste
+    electronic_device:
+      family: e_waste
+    cable:
+      family: e_waste
+
+  medical:
+    medical_gloves:
+      family: medical
+    gauze:
+      family: medical
+    medical_cap:
+      family: medical
+    medical_glasses:
+      family: medical
+    shoe_cover:
+      family: medical
+    test_tube:
+      family: medical
+    urine_bag:
+      family: medical
+    medical_filter:
+      family: medical
+
+  residual:
+    general_trash:
+      family: residual
+    tissue:
+      family: residual
+    unlabeled_litter:
+      family: residual
+
+  hazardous_special:
+    aerosol_container:
+      family: hazardous_special
+    broken_glass:
+      family: hazardous_special
+    cigarette:
+      family: hazardous_special
+
+
+source_mapping:
+
+  garbage_dataset:
+
+    battery:
+      canonical: battery
+      status: include
+      training_role: core
+
+    biological:
+      canonical: biological
+      status: include
+      training_role: core
+
+    cardboard:
+      canonical: cardboard
+      status: include
+      training_role: core
+
+    clothes:
+      canonical: clothes
+      status: include
+      training_role: core
+
+    glass:
+      canonical: glass
+      status: include
+      training_role: core
+
+    metal:
+      canonical: metal
+      status: include
+      training_role: core
+
+    paper:
+      canonical: paper
+      status: include
+      training_role: core
+
+    plastic:
+      canonical: plastic
+      status: include
+      training_role: core
+
+    shoes:
+      canonical: shoes
+      status: include
+      training_role: core
+
+    trash:
+      canonical: trash
+      status: include
+      training_role: core
+
+
+  trashnet_plus_plus:
+
+    Plastic:
+      canonical: plastic
+      status: include
+      training_role: expansion
+
+    Glass:
+      canonical: glass
+      status: include
+      training_role: expansion
+
+    Metal:
+      canonical: metal
+      status: include
+      training_role: expansion
+
+    Can:
+      canonical: metal
+      status: include
+      training_role: secondary
+
+    E-wast:
+      canonical: electronic_device
+      status: include
+      training_role: expansion
+
+    Cable:
+      canonical: cable
+      status: include
+      training_role: expansion
+
+    Medical Wast:
+      canonical: null
+      status: exclude_from_clean_training
+      training_role: external_noisy
+
+
+  medical_waste_4_0:
+
+    Dataset_A:
+      role: medical_training_validation
+      status: include
+
+    Dataset_B:
+      role: medical_external_test
+      status: external_only
+
+
+  medical_waste_labels:
+
+    gauze:
+      canonical: gauze
+      status: include
+
+    gauzes:
+      canonical: gauze
+      status: include
+
+    glove_pair_latex:
+      canonical: medical_gloves
+      material: latex
+      quantity: pair
+      status: include
+
+    glove_pair_nitrile:
+      canonical: medical_gloves
+      material: nitrile
+      quantity: pair
+      status: include
+
+    glove_pair_surgery:
+      canonical: medical_gloves
+      material: surgical
+      quantity: pair
+      status: include
+
+    glove_single_latex:
+      canonical: medical_gloves
+      material: latex
+      quantity: single
+      status: include
+
+    glove_single_nitrile:
+      canonical: medical_gloves
+      material: nitrile
+      quantity: single
+      status: include
+
+    glove_single_surgery:
+      canonical: medical_gloves
+      material: surgical
+      quantity: single
+      status: include
+
+    medical_cap:
+      canonical: medical_cap
+      status: include
+
+    medical_filter:
+      canonical: medical_filter
+      status: include
+
+    medical_glasses:
+      canonical: medical_glasses
+      status: include
+
+    shoe_cover_pair:
+      canonical: shoe_cover
+      quantity: pair
+      status: include
+
+    shoe_cover_single:
+      canonical: shoe_cover
+      quantity: single
+      status: include
+
+    test_tube:
+      canonical: test_tube
+      status: include
+
+    urine_bag:
+      canonical: urine_bag
+      status: include
+
+
+  taco:
+
+    Battery:
+      canonical: battery
+      status: detection_only
+
+    Food waste:
+      canonical: food_waste
+      status: detection_only
+
+    Shoe:
+      canonical: shoes
+      status: detection_only
+
+    Tissues:
+      canonical: tissue
+      status: detection_only
+
+    Unlabeled litter:
+      canonical: unlabeled_litter
+      status: detection_only
+
+    Aerosol:
+      canonical: aerosol_container
+      status: detection_only
+
+    Broken glass:
+      canonical: broken_glass
+      status: detection_only
+
+    Cigarette:
+      canonical: cigarette
+      status: detection_only
+
+    default:
+      canonical: null
+      status: detection_only
+
+
+  coco:
+    role: ood_non_waste
+    status: external_only
+    training_role: domain_gate
