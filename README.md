@@ -865,9 +865,9 @@ python scripts/evaluate_expanded_resnet50_stage2.py
 
 | Name |
 |:--|
-| Drashtant Mevada |
-| Smit Rathod |
 | Nirav Panwala |
+| Smit Rathod |
+| Drashtant Mevada |
 | Krish Tandel |
 | Ronak Solanki |
 
@@ -887,4 +887,4 @@ No license file was present in the inspected snapshot of this repository. Until 
 
 ## 33. Repository Link
 
-**https://github.com/Drashtant007/WasteWise-AI**
+**https://github.com/NiravHub/WasteWise-AI**
