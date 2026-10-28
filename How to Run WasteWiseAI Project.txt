@@ -1,0 +1,47 @@
+How to Run WasteWiseAI Project
+---------------------------------------------------------------------------------------------------
+Step 1: Open the project folder
+Open VS Code and open your project folder:
+C:\Users\LENOVO\Desktop\Study\Semester 5\AI\WasteWise AI
+Open the terminal using Terminal → New Terminal.
+---------------------------------------------------------------------------------------------------
+Step 2: Start the backend
+In the first terminal, run these commands one by one:
+cd "C:\Users\LENOVO\Desktop\Study\Semester 5\AI\WasteWise AI"
+Activate your existing Python environment:
+.\.venv\Scripts\Activate.ps1
+Start the backend server:
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+
+Wait until the terminal shows that the pipeline is ready and the server is running. Keep this terminal open.
+
+You can check the backend at:
+http://127.0.0.1:8000
+---------------------------------------------------------------------------------------------------
+Step 3: Start the frontend
+Open a second terminal in VS Code. Do not stop the backend.
+Run:
+cd "C:\Users\LENOVO\Desktop\Study\Semester 5\AI\WasteWise AI\frontend"
+Then start the frontend:
+npm run dev
+
+Wait for Vite to show a local URL, usually:
+
+http://localhost:5173
+
+Open the exact URL shown in your terminal.
+---------------------------------------------------------------------------------------------------
+Step 4: Use WasteWise AI
+
+Terminal 1 — Backend
+Runs the AI models, waste detection, classification, and API.
+
+Terminal 2 — Frontend
+Runs the website interface where you upload waste images and view results.
+
+Both terminals must remain running while you use the application.
+If you get an error
+- .venv not found: The Python environment may be in a different folder.
+- npm not recognized: Install Node.js, then reopen VS Code.
+- Port 8000 already in use: Another backend instance may already be running.
+- Model weights missing: Check that the model files were downloaded, especially if you cloned the project using Git LFS.
